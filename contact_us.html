@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Us</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Ensure x-cloak hides elements until Alpine boots -->
+  <style>
+    [x-cloak] { display: none !important; }
+  </style>
+</head>
+<body class="bg-black text-white font-sans">
+
+<!-- Navbar (unchanged except mobile menu var renamed to avoid collisions) -->
+<div class="max-w-7xl mx-auto px-6">
+  <div class="h-16 flex items-center justify-between">
+    <div class="flex items-center">
+      <img src="https://royalgeorgehotel.com.au/wp-content/themes/royalgeorge/images/logo.jpg" alt="RG" class="h-10 w-auto">
+    </div>
+
+    <nav class="hidden md:flex items-center justify-center gap-8">
+      <a href="#" class="text-white hover:text-yellow-300">Home</a>
+      <a href="#" class="text-white hover:text-yellow-300">Bars</a>
+      <a href="#" class="text-white hover:text-yellow-300">Menu</a>
+      <a href="#" class="text-yellow-300 relative inline-flex flex-col items-center">
+        Contact Us
+        <span class="mt-1 h-0.5 w-20 rounded-full bg-yellow-300"></span>
+      </a>
+    </nav>
+
+    <div class="hidden sm:flex items-center justify-end">
+      <a class="px-6 py-2 rounded-full bg-white text-black font-semibold">Login</a>
+    </div>
+
+    <!-- Mobile Hamburger (separate Alpine scope using mobileOpen) -->
+    <div x-data="{ mobileOpen: false }" class="md:hidden flex items-center">
+      <button @click="mobileOpen = !mobileOpen" class="text-white focus:outline-none">
+        <svg x-show="!mobileOpen" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        <svg x-show="mobileOpen" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+
+      <div x-show="mobileOpen" x-transition class="absolute top-16 left-0 w-full bg-black/90 text-white flex flex-col items-center space-y-6 py-6 md:hidden z-50">
+        <a href="#" class="hover:text-yellow-300">Home</a>
+        <a href="#" class="hover:text-yellow-300">Bars</a>
+        <a href="#" class="hover:text-yellow-300">Menu</a>
+        <a href="#" class="text-yellow-300">Contact Us</a>
+        <a href="#" class="px-6 py-2 rounded-full bg-white text-black font-semibold">Login</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Alpine.js -->
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
+<!-- WRAPPER for floating bubble + modal using one Alpine scope -->
+<div x-data="{ bubbleOpen: false, showTable: false, showEvents: false, showRooms: false }">
+
+  <!-- Floating Bookings Bubble -->
+  <div class="fixed top-1/2 right-10 -translate-y-1/2 z-50">
+    <div class="relative">
+      <button
+        @click="bubbleOpen = !bubbleOpen"
+        type="button"
+        class="w-24 h-24 lg:w-28 lg:h-28 rounded-full bg-black border-2 border-white
+               grid place-items-center text-sm font-medium hover:bg-yellow-300 hover:text-black transition">
+        Bookings
+      </button>
+
+      <div class="absolute inset-0 pointer-events-none">
+        <!-- Table -->
+        <button
+          @click.stop="showTable = true"
+          type="button"
+          class="pointer-events-auto absolute w-20 h-20 lg:w-24 lg:h-24 grid place-items-center rounded-full bg-black border-2 border-white
+                 text-xs lg:text-sm font-medium hover:bg-yellow-300 hover:text-black transition"
+          :class="bubbleOpen ? 'translate-x-[-80%] translate-y-[-110%] opacity-100 scale-100' : 'opacity-0 scale-0'"
+          style="transition: all 0.28s cubic-bezier(.2,.9,.2,1);">
+          Table
+        </button>
+
+        <!-- Events -->
+        <button
+          @click.stop="showEvents = true"
+          type="button"
+          class="pointer-events-auto absolute w-20 h-20 lg:w-24 lg:h-24 grid place-items-center rounded-full bg-black border-2 border-white
+                 text-xs lg:text-sm font-medium hover:bg-yellow-300 hover:text-black transition"
+          :class="bubbleOpen ? 'translate-x-[-150%] translate-y-[10%] opacity-100 scale-100' : 'opacity-0 scale-0'"
+          style="transition: all 0.28s cubic-bezier(.2,.9,.2,1) 0.06s;">
+          Events
+        </button>
+
+        <!-- Rooms -->
+        <button
+          @click.stop="showRooms = true"
+          type="button"
+          class="pointer-events-auto absolute w-20 h-20 lg:w-24 lg:h-24 grid place-items-center rounded-full bg-black border-2 border-white
+                 text-xs lg:text-sm font-medium hover:bg-yellow-300 hover:text-black transition"
+          :class="bubbleOpen ? 'translate-x-[-80%] translate-y-[130%] opacity-100 scale-100' : 'opacity-0 scale-0'"
+          style="transition: all 0.28s cubic-bezier(.2,.9,.2,1) 0.12s;">
+          Rooms
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table Modal -->
+  <div
+    x-cloak
+    x-show="showTable"
+    x-transition.opacity
+    @click.self="showTable = false"
+    @keydown.escape.window="showTable = false"
+    class="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
+    <div
+      x-show="showTable"
+      x-transition.scale.origin.center
+      class="relative w-[90vw] sm:w-[80vw] md:w-[70vw] h-[85vh] md:h-[70vh] max-w-[1200px] max-h-[90vh] bg-white text-black rounded-lg shadow-xl overflow-hidden">
+      <button @click="showTable = false"
+              class="absolute top-3 right-3 px-3 py-1 bg-black text-white rounded hover:bg-yellow-300 hover:text-black transition z-10">
+        ✕
+      </button>
+      <iframe src="bookingpage.html" title="Table Booking"
+              class="w-full h-full border-0"
+              sandbox="allow-same-origin allow-scripts allow-forms allow-popups"></iframe>
+    </div>
+  </div>
+
+  <!-- Events Modal -->
+  <div
+    x-cloak
+    x-show="showEvents"
+    x-transition.opacity
+    @click.self="showEvents = false"
+    @keydown.escape.window="showEvents = false"
+    class="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
+    <div
+      x-show="showEvents"
+      x-transition.scale.origin.center
+      class="relative w-[90vw] sm:w-[80vw] md:w-[70vw] h-[85vh] md:h-[70vh] max-w-[1200px] max-h-[90vh] bg-white text-black rounded-lg shadow-xl overflow-hidden">
+      <button @click="showEvents = false"
+              class="absolute top-3 right-3 px-3 py-1 bg-black text-white rounded hover:bg-yellow-300 hover:text-black transition z-10">
+        ✕
+      </button>
+      <iframe src="functionbooking.html" title="Events"
+              class="w-full h-full border-0"
+              sandbox="allow-same-origin allow-scripts allow-forms allow-popups"></iframe>
+    </div>
+  </div>
+
+  <!-- Rooms Modal -->
+  <div
+    x-cloak
+    x-show="showRooms"
+    x-transition.opacity
+    @click.self="showRooms = false"
+    @keydown.escape.window="showRooms = false"
+    class="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
+    <div
+      x-show="showRooms"
+      x-transition.scale.origin.center
+      class="relative w-[90vw] sm:w-[80vw] md:w-[70vw] h-[85vh] md:h-[70vh] max-w-[1200px] max-h-[90vh] bg-white text-black rounded-lg shadow-xl overflow-hidden">
+      <button @click="showRooms = false"
+              class="absolute top-3 right-3 px-3 py-1 bg-black text-white rounded hover:bg-yellow-300 hover:text-black transition z-10">
+        ✕
+      </button>
+      <iframe src="hotelbooking.html" title="Rooms"
+              class="w-full h-full border-0"
+              sandbox="allow-same-origin allow-scripts allow-forms allow-popups"></iframe>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+  <!-- Hero Banner -->
+  <section class="relative">
+    <img src="contact_hero_background.jpg" alt="Hotel Banner" class="w-full h-72 object-cover">
+    <div class="absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center text-center px-4">
+      <h1 class="text-4xl font-bold mb-2">Contact Us</h1>
+      <p class="text-sm max-w-2xl">
+        Feel free to get in touch! Fill the form out below and one of our friendly staff will be in touch as soon as we can.
+        Alternatively, use the buttons below to get in direct contact with us. Please check our opening times in the footer to ensure we are open.
+      </p>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="bg-[#191A1C] min-h-screen flex items-center justify-center px-2 py-8 sm:px-0">
+  <div class="relative w-full max-w-6xl mx-auto rounded-2xl bg-white p-2 sm:p-4 flex flex-col md:flex-row items-stretch border-4 border-white border-opacity-80" style="box-sizing: border-box;">
+
+    <!-- Left - Contact Info -->
+    <div class="relative bg-black rounded-xl py-10 px-6 md:px-10 w-full md:w-[410px] min-w-0 md:min-w-[320px] flex flex-col justify-between z-10 md:mr-6 mb-6 md:mb-0">
+      <div>
+        <h2 class="text-white text-3xl font-bold mb-2">Contact Information</h2>
+        <p class="text-white/80 text-base mb-8 mt-1">Say something to start a live chat!</p>
+        <div class="space-y-7">
+          <div class="flex items-center space-x-4">
+            <!-- phone icon... -->
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2c-3.15-.35-6.16-1.77-8.47-4.09s-3.74-5.32-4.09-8.47A2 2 0 0 1 4.11 4H7.11A2 2 0 0 1 9.13 6.09a16 16 0 0 0 5.15 2.51A2 2 0 0 1 16 8a2 2 0 0 1 2 2c0 .55-.22 1.05-.59 1.41A2 2 0 0 1 16 12l-.18.04-1.17 1.3c-.11.13-.18.27-.18.43a2 2 0 0 0 2 2c.16 0 .3-.07.43-.18l1.3-1.17L20 13.05A2 2 0 0 1 22 14c0 .18-.03.36-.08.54a17.89 17.89 0 0 0-.69 2.38c-.06.2-.12.39-.19.58l.04-.04z"></path></svg>
+            <a href="tel:0732522524" class="text-white text-lg underline">(07) 3252 2524</a>
+          </div>
+          <div class="flex items-center space-x-4">
+            <!-- email icon... -->
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 12h.01M21 12c0 4.97-4.02 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z"/><path d="M22 12h0"></path></svg>
+            <a href="mailto:demo@gmail.com" class="text-white text-lg">demo@gmail.com</a>
+          </div>
+          <div class="flex items-center space-x-4">
+            <!-- location icon... -->
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 12.414C12.633 11.633 12.633 10.367 13.414 9.586C14.195 8.805 15.461 8.805 16.242 9.586L20.485 13.828C21.266 14.609 21.266 15.875 20.485 16.656C19.703 17.438 18.438 17.438 17.657 16.657Z"/><path d="M15.535 6.465a5 5 0 1 0 7.07 7.07 5 5 0 0 0-7.07-7.07Z"></path></svg>
+            <span class="text-white text-lg leading-tight">Cnr Ann & Brunswick Streets,<br>Fortitude Valley, Brisbane</span>
+          </div>
+          <div class="flex items-center space-x-4">
+            <!-- clock icon... -->
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"></path></svg>
+            <span class="text-white text-lg leading-tight">
+              Sunday to Thursday: 10am — 5:30am<br>
+              Friday & Saturday: 10am — 5:30am
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="flex space-x-4">
+  <!-- Twitter -->
+  <a href="#" aria-label="Twitter"
+     class="w-10 h-10 rounded-full bg-transparent flex items-center justify-center 
+            hover:bg-white transition duration-300">
+    <img src="https://www.google.com/s2/favicons?sz=64&domain=twitter.com"
+         alt="Twitter" class="w-6 h-6">
+  </a>
+
+  <!-- Instagram -->
+  <a href="#" aria-label="Instagram"
+     class="w-10 h-10 rounded-full bg-transparent flex items-center justify-center 
+            hover:bg-white transition duration-300">
+    <img src="https://www.google.com/s2/favicons?sz=64&domain=instagram.com"
+         alt="Instagram" class="w-6 h-6">
+  </a>
+
+  <!-- Discord -->
+  <a href="#" aria-label="Discord"
+     class="w-10 h-10 rounded-full bg-transparent flex items-center justify-center 
+            hover:bg-white transition duration-300">
+    <img src="https://www.google.com/s2/favicons?sz=64&domain=discord.com"
+         alt="Discord" class="w-6 h-6">
+  </a>
+</div>
+
+    </div>
+
+    <!-- Right - Form -->
+    <form class="bg-white rounded-xl py-8 px-4 sm:px-8 w-full md:w-[60%] min-h-[570px] flex flex-col relative z-10">
+      <div class="flex flex-col sm:flex-row sm:space-x-6 space-y-6 sm:space-y-0 mb-8">
+        <div class="w-full sm:w-1/2">
+          <label class="block text-gray-700 text-base font-medium mb-2" for="firstName">First Name</label>
+          <input type="text" id="firstName" placeholder="John" class="w-full bg-transparent border-b border-gray-300 focus:border-black outline-none py-1 text-black text-xl"/>
+        </div>
+        <div class="w-full sm:w-1/2">
+          <label class="block text-gray-700 text-base font-medium mb-2" for="lastName">Last Name</label>
+          <input type="text" id="lastName" placeholder="Doe" class="w-full bg-transparent border-b border-gray-300 focus:border-black outline-none py-1 text-black text-xl"/>
+        </div>
+      </div>
+      <div class="flex flex-col sm:flex-row sm:space-x-6 space-y-6 sm:space-y-0 mb-8">
+        <div class="w-full sm:w-1/2">
+          <label class="block text-gray-700 text-base font-medium mb-2" for="email">Email</label>
+          <input type="email" id="email" placeholder="" class="w-full bg-transparent border-b border-gray-300 focus:border-black outline-none py-1 text-black text-xl"/>
+        </div>
+        <div class="w-full sm:w-1/2">
+          <label class="block text-gray-700 text-base font-medium mb-2" for="phone">Phone Number</label>
+          <div class="flex items-center">
+            <input type="tel" id="phone" value="+1 012 3456 789" class="w-full bg-transparent border-b border-black focus:border-yellow-500 outline-none py-1 text-black text-xl"/>
+          </div>
+        </div>
+      </div>
+      <div class="mb-8">
+        <label class="block text-black text-base font-semibold mb-2">Select Subject?</label>
+        <div class="flex flex-wrap items-center gap-x-8 gap-y-2">
+          <label class="flex items-center space-x-2 text-black font-medium"><input checked type="radio" name="subject" class="accent-black"/><span>General Inquiry</span></label>
+          <label class="flex items-center space-x-2 text-black font-medium"><input type="radio" name="subject" class="accent-black"/><span>General Inquiry</span></label>
+          <label class="flex items-center space-x-2 text-black font-medium"><input type="radio" name="subject" class="accent-black"/><span>General Inquiry</span></label>
+          <label class="flex items-center space-x-2 text-black font-medium"><input type="radio" name="subject" class="accent-black"/><span>General Inquiry</span></label>
+        </div>
+      </div>
+      <div class="mb-5">
+        <label class="block text-gray-400 text-base font-medium mb-2" for="message">Message</label>
+        <textarea id="message" placeholder="Write your message.." class="w-full bg-transparent border-b border-gray-300 focus:border-black outline-none py-1 text-black text-lg resize-none h-20"></textarea>
+        <div class="text-xs text-gray-400 mt-1">* Offline: 9am – 5pm AEST *</div>
+      </div>
+      <div class="flex justify-end items-center mt-6">
+        <button type="submit" class="bg-black text-white rounded-lg px-10 py-3 font-medium text-lg shadow-lg hover:bg-yellow-300 hover:text-black">Send Message</button>
+      </div>
+    </form>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-white text-black">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 py-12 grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+
+        <!-- Left: Logo + description -->
+        <div class="lg:col-span-4 space-y-4">
+            <img src="https://royalgeorgehotel.com.au/wp-content/themes/royalgeorge/images/logo.jpg" alt="RG logo" class="h-14 w-auto">
+            <p class="text-base leading-7">
+                The Royal George Hotel is where the best night out begins. Our family owned pub
+                is made up of 4 separate bars including the valley’s largest beer garden.
+            </p>
+        </div>
+
+        <!-- Middle: Quick Links + Resources -->
+        <div class="lg:col-span-4 grid grid-cols-2 gap-8">
+            <div>
+                <h4 class="font-semibold text-lg mb-4">Quick Links</h4>
+                <ul class="space-y-2">
+                    <li><a href="#" class="hover:text-yellow-600">Menu</a></li>
+                    <li><a href="#" class="hover:text-yellow-600">Bars</a></li>
+                    <li><a href="#" class="hover:text-yellow-600">About</a></li>
+                    <li><a href="#" class="hover:text-yellow-600">Contact Us</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-semibold text-lg mb-4">Resources</h4>
+                <ul class="space-y-2">
+                    <li><a href="#" class="hover:text-yellow-600">Blog</a></li>
+                    <li><a href="#" class="hover:text-yellow-600">Career</a></li>
+                    <li><a href="#" class="hover:text-yellow-600">Privacy Policy</a></li>
+                    <li><a href="#" class="hover:text-yellow-600">Terms and Conditions</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Right: Map -->
+        <div class="lg:col-span-4">
+            <div class="w-full overflow-hidden rounded-md ring-1 ring-black/10">
+                <iframe class="w-full h-64 md:h-72 lg:h-80"
+                        loading="lazy"
+                        title="Royal George Hotel - Map"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        src="https://www.google.com/maps?q=Royal%20George%20Hotel%20327%20Brunswick%20St%20Fortitude%20Valley%20QLD%204006&output=embed">
+                </iframe>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Bottom black bar -->
+    <div class="bg-black text-white">
+        <div class="max-w-7xl mx-auto px-6 lg:px-10 py-3 text-center text-sm">
+            The Royal George Hotel, Cnr Ann &amp; Brunswick Streets, Fortitude Valley
+            <a href="tel:+61732525224" class="underline underline-offset-2 hover:text-yellow-400"> (07) 3252 5224</a>
+            • Copyright RoyalGeorgeHotel. <span id="yr"></span> ©️
+        </div>
+    </div>
+</footer>
+
+
+</body>
+</html>

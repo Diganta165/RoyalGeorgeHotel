@@ -1,0 +1,144 @@
+.layout-root {
+  height: 100vw;
+}
+
+.layout-root.bg-dark {
+  background-color: black;
+}
+
+.layout-root.flex {
+  display: flex;
+}
+
+.layout-root.flex-direction-vertical {
+  flex-direction: vertical;
+}
+
+.layout-root.flex-direction-horizontal {
+  flex-direction: horizontal;
+}
+
+.layout-root.grid {
+  display: grid;
+}
+
+.layout-root.grid-template-vertical-2 {
+  display: grid;
+  grid-template-rows: repeat(2, minmax(100px, 1fr));
+  grid-template-areas:
+    'a'
+    'b';
+  gap: 1rem;
+}
+
+.layout-root.grid-template-vertical-40-60 {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 2fr 3fr;
+  grid-template-areas:
+    'a'
+    'b';
+  gap: 1rem;
+}
+
+.layout-root.grid-template-vertical-20-80 {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 4fr;
+  grid-template-areas:
+    'a'
+    'b';
+  gap: 1rem;
+}
+
+.layout-root.grid-template-vertical-3 {
+  display: grid;
+  grid-template-rows: repeat(3, minmax(100px, 1fr));
+  grid-template-areas:
+    'a'
+    'b'
+    'c';
+  gap: 1rem;
+}
+
+.layout-root.grid-template-vertical-20-60-20 {
+  display: grid;
+  grid-template-rows: 1fr 3fr 1fr;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    'a'
+    'b'
+    'c';
+  gap: 1rem;
+}
+
+.layout-root.grid-template-vertical-20-40-40 {
+  display: grid;
+  grid-template-rows: 1fr 2fr 2fr;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    'a'
+    'b'
+    'c';
+  gap: 1rem;
+}
+
+.layout-root.grid-template-vertical-30-40-30 {
+  display: grid;
+  grid-template-rows: 1fr 3fr 1fr;
+  grid-template-areas:
+    'a'
+    'b'
+    'c';
+  gap: 0;
+}
+
+.layout-root.grid-template-vertical-4 {
+  display: grid;
+  grid-template-rows: repeat(4, minmax(100px, 1fr));
+  grid-template-areas:
+    'a'
+    'b'
+    'c'
+    'd';
+  gap: 1rem;
+}
+
+.layout-root.grid-template-horizontal-30-70 {
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 3fr 7fr;
+  grid-template-areas: 'a b';
+  gap: 1rem;
+}
+
+.layout-root.grid-template-horizontal-70-30 {
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 7fr 3fr;
+  grid-template-areas: 'a b';
+  gap: 1rem;
+}
+
+.layout-root.padding-left-sm {
+  padding-left: 0.5rem;
+}
+.layout-root.padding-right-sm {
+  padding-right: 0.5rem;
+}
+.layout-root.padding-top-sm {
+  padding-top: 0.5rem;
+}
+.layout-root.padding-bottom-sm {
+  padding-bottom: 0.5rem;
+}
+
+.layout-root.width-100 {
+  width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .layout-root {
+    height: 100vw;
+  }
+}
