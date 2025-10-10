@@ -1,13 +1,12 @@
 import React from 'react';
-import TableBookingForm from '../../components/TableBookingForm/TableBookingForm';
 
 const Home = () => {
-    return (
-        <div>
-            <h1>G'day Cunts</h1>
-            <TableBookingForm />
-        </div>
-    );
+  return (
+    <div>
+      <p>Hello World</p>
+      <p>Hello World</p>
+    </div>
+  );
 };
 
 export default Home;
