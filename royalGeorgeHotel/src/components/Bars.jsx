@@ -4,12 +4,14 @@ import Footer from './Footer';
 import heroBanner from "../assets/contact_hero_background.jpg";
 
 import Barsgrid from './Barsgrid';
+import BookingBubble from './Bookingbubble';
 
 
 const Bars = () => {
     return (
         <div>
             <Header></Header>
+            <BookingBubble></BookingBubble>
             {/* Hero Banner */}
                   <section className="relative">
                     <img

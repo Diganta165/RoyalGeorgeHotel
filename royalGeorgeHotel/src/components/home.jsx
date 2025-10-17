@@ -2,6 +2,9 @@ import React from "react";
 import Header from "./header";
 import Footer from "./Footer";
 import Barsgrid from "./Barsgrid";
+import BookingBubble from "./Bookingbubble";
+import HomepageHero from "./HomepageHero"
+import Menucontent from "./Menucontent";
 
 
 export default function Home() {
@@ -10,8 +13,10 @@ export default function Home() {
       {/* Navbar */}
       
       <Header></Header>
-
+      <BookingBubble></BookingBubble>
+      <HomepageHero></HomepageHero>
       <Barsgrid></Barsgrid>
+      <Menucontent></Menucontent>
       <Footer></Footer>
     </div>
   );
