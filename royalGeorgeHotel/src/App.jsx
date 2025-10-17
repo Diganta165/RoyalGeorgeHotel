@@ -6,6 +6,7 @@ import Bars from "./components/Bars";
 import Menu from "./components/Menu";
 import BookingForm from "./components/BookingForm";
 import BookingSummary from "./components/BookingSummary"
+import AdminDashboard from "./components/AdminDashboard";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/menu" element={<Menu />} /> {/* Menu page */}
         <Route path="/bookingform" element={<BookingForm />} />
         <Route path="/bookingsummary" element={<BookingSummary />}/>
+        <Route path="/admin" element={<AdminDashboard />}/>
         
       </Routes>
     </Router>
