@@ -59,7 +59,7 @@ export default function ArtistsSection({
     artists = defaultArtists,
 }) {
     return (
-        <section className="w-full bg-neutral-900 py-10">
+        <section className="w-full bg-black py-10">
             <div className="max-w-6xl mx-auto px-4">
                 <h2 className="text-white text-2xl md:text-3xl font-semibold mb-6">
                     {title}

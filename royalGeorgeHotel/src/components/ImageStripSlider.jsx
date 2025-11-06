@@ -38,7 +38,7 @@ export default function ImageStripSlider({
     }, [speed]);
 
     return (
-        <section className={`w-full bg-neutral-900 py-8 overflow-hidden ${className}`}>
+        <section className={`w-full bg-black py-8 overflow-hidden ${className}`}>
             <div className="w-full">
                 {title && (
                     <h2 className="text-white text-xl md:text-2xl font-semibold mb-4 px-4">

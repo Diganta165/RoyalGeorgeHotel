@@ -38,7 +38,7 @@ export default function LostAndFoundSection({
     }
 
     return (
-        <section className="w-full bg-neutral-900 py-16">
+        <section className="w-full bg-black py-16">
             <div className="max-w-6xl mx-auto px-4 grid gap-12 md:grid-cols-2 items-center">
                 {/* Left heading */}
                 <div className="text-left">

@@ -45,7 +45,7 @@ const Barsgrid = ({ bars }) => {
             : defaultBars;
 
     return (
-        <main className="bg-neutral-900/40">
+        <main className="bg-black">
             <section className="max-w-7xl mx-auto px-6 pt-16 pb-24 grid grid-cols-1 md:grid-cols-2 gap-14">
                 {items.map((bar, idx) => (
                     <article
