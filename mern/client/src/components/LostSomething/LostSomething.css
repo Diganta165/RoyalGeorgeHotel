@@ -1,0 +1,47 @@
+.lost-form {
+  display: flex;
+  flex-direction: column;
+  width: 320px;
+  gap: 12px;
+  background-color: #000; /* Black background */
+  padding: 20px;
+  border-radius: 8px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.lost-input {
+  background-color: transparent;
+  border: 1px solid #999;
+  border-radius: 6px;
+  padding: 10px 14px;
+  color: #fff;
+  font-size: 1rem;
+  outline-offset: 2px;
+  transition: border-color 0.3s ease;
+}
+
+.lost-input::placeholder {
+  color: #999;
+}
+
+.lost-input:focus {
+  border-color: #ffb600; /* Golden highlight when focused */
+  outline: none;
+}
+
+.lost-submit-btn {
+  background-color: #ffb600; /* Yellow/gold color */
+  color: #000;
+  border: none;
+  border-radius: 6px;
+  padding: 12px 0;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: -webkit-fill-available;
+}
+
+.lost-submit-btn:hover {
+  background-color: #ddb100;
+}

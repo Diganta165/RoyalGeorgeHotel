@@ -1,0 +1,24 @@
+.booking {
+    display: inline-flex;
+    position: relative;
+    top: 18rem;
+    left: 112rem;
+    height: 6rem;
+    width: 6rem;
+    background-color: black;
+    border-radius: 50%;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.booking :hover {
+    color: #ffb600; /* Yellow/gold color */
+    /* color: black; */
+    
+}
+.booking h2 :hover {
+    color: black;
+}
+
