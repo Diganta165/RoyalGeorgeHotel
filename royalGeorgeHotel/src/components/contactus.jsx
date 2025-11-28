@@ -69,7 +69,7 @@ export default function ContactUs() {
         <div className="absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center text-center px-4">
           <h1 className="text-4xl font-bold mb-2">Contact Us</h1>
           <p className="text-sm max-w-2xl">
-            Feel free to get in touch! Fill the form out below and one of our friendly staff will be in touch as soon as we can. Alternatively, use the buttons below to get in direct contact with us. Please check our opening times in the footer to ensure we are open.
+            Get in touch! Fill the form out below and one of our friendly staff will be in touch as soon as we can. Alternatively, use the buttons below to get in direct contact with us. Please check our opening times in the footer to ensure we are open.
           </p>
         </div>
       </section>
